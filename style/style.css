@@ -49,6 +49,7 @@ body {
 
 .label {
   margin-top: .5em;
+  padding-right: 1em;
 }
 
 .search-label {
