@@ -13,7 +13,7 @@ class SearchResults extends Component {
     data: undefined
   };
 
-  componentWillUpdate() {
+  componentDidUpdate() {
     if (this.props.term && this.props.term.length > 1) {
       const url = `http://www.omdbapi.com/?s=${this.props.term}&r=json&type=movie`;
 

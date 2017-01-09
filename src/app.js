@@ -56,7 +56,7 @@ class App extends Component {
   clearMovies() {
     this.storage.clear();
 
-    this.setState({term: null});
+    this.setState({term: null, movies: getMovieList(this.storage)});
   }
 
   removeVideo(d) {

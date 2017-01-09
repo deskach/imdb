@@ -4,7 +4,7 @@ export default class VideoItem extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
-    rating: PropTypes.string.isRequired,
+    rating: PropTypes.string,
     onClick: PropTypes.func.isRequired
   };
 
