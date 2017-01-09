@@ -1,5 +1,6 @@
-import React, {Component, PropTypes} from 'react';
-import axios from 'axios';
+import React, {Component, PropTypes} from "react";
+import axios from "axios";
+import SearchItem from "./search_item";
 
 //TODO - remove this file when react-refetch is supported
 class SearchResults extends Component {
@@ -7,20 +8,40 @@ class SearchResults extends Component {
     term: PropTypes.string.isRequired,
   };
 
-  state = {data: null};
+  state = {
+    data: undefined
+  };
 
-  componentDidMount() {
-    const url = `http://www.omdbapi.com/?i=${this.props.term}&plot=short&r=json`;
+  componentWillUpdate() {
+    if (this.props.term && this.props.term.length > 1) {
+      const url = `http://www.omdbapi.com/?s=${this.props.term}&plot=short&r=json`;
 
-    axios.get(url)
-      .then(data => {
-        this.setState({data});
-      });
+      axios.get(url)
+        .then(data => {
+          const value = data.data.Search || null;
+
+          this.setState({data: value});
+        });
+    }
+  }
+
+  onAdd(id) {
+    console.log(`${id} was added`);
   }
 
   render () {
-    if(this.state.data) {
-      return <div>{JSON.stringify(this.state.data)}</div>
+    const {data} = this.state;
+    if (data) {
+      const items = data.map(d => (
+        <SearchItem title={d.Title}
+                    key={d.imdbID}
+                    onClick={this.onAdd.bind(this, d.imdbID)}
+        />
+      ));
+
+      return <div>{items}</div>
+    } else if (data === null) {
+      return <div>Nothing found</div>
     }
 
     return <div>Loading...</div>

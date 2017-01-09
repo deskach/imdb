@@ -30,6 +30,11 @@ body {
   background-color: #eee;
 }
 
+.search-item {
+  height: 4em;
+  border: 1px solid lightgray;
+}
+
 .fleft {
   float: left;
 }
@@ -44,4 +49,15 @@ body {
 
 .label {
   margin-top: .5rem;
+}
+
+.search-label {
+  float: left;
+  margin-top: 1em;
+  margin-left: 1em;
+}
+
+.btn-add {
+  margin-top: 1em;
+  margin-right: 1em;
 }
