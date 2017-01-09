@@ -27,7 +27,6 @@
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-refetch": "^1.0.0",
-    "react-router": "^2.0.1",
-    "redux": "^3.0.4"
+    "react-router": "^2.0.1"
   }
 }

@@ -20,19 +20,11 @@ class VideoList extends React.Component {
           <select id="sort"
                   onChange={this.props.onSortingChange}
                   className="form-control"
+                  value={this.props.sort}
                   style={{width: 'auto'}}>
-            <option value={SRT_TITLE}
-                    selected={this.props.sort == SRT_TITLE}>
-              Alphabetically
-            </option>
-            <option value={SRT_RATING}
-                    selected={this.props.sort == SRT_RATING}>
-              Rating
-            </option>
-            <option value={SRT_YEAR}
-                    selected={this.props.sort == SRT_YEAR}>
-              Year
-            </option>
+            <option value={SRT_TITLE}> Alphabetically</option>
+            <option value={SRT_RATING}> Rating</option>
+            <option value={SRT_YEAR}> Year</option>
           </select>
         </div>
         <br/>
