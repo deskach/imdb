@@ -11,7 +11,7 @@ class App extends Component {
   state = {
     movies: [],
     term: '',
-    page: 0,
+    page: 1,
     sort: SRT_TITLE
   };
 
@@ -49,6 +49,7 @@ class App extends Component {
     this.storage.setItem(data.imdbID, JSON.stringify(data));
     this.setState({
       term: '',
+      page: 1,
       movies: this.getMovies()
     });
 
@@ -60,6 +61,7 @@ class App extends Component {
 
     this.setState({
       term: null,
+      page: 1,
       movies: this.getMovies()
     });
   }
