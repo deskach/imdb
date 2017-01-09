@@ -50,7 +50,7 @@ class App extends Component {
       movies: getMovieList(this.storage)
     });
 
-    console.log(`${JSON.stringify(data)}`);
+    // console.log(`${JSON.stringify(data)}`);
   }
 
   clearMovies() {

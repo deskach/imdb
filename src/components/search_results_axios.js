@@ -12,6 +12,7 @@ class SearchResults extends Component {
   state = {
     data: undefined
   };
+  isActive = true; //TODO: get rid of me by using a cancallable promise
 
   componentDidUpdate() {
     if (this.props.term && this.props.term.length > 1) {
@@ -21,7 +22,9 @@ class SearchResults extends Component {
         .then(data => {
           const value = data.data.Search || null;
 
-          this.setState({data: value});
+          if (this.isActive) {
+            this.setState({data: value});
+          }
         });
     }
   }
@@ -46,6 +49,10 @@ class SearchResults extends Component {
     }
 
     return <div>Loading...</div>
+  }
+
+  componentWillUnmount() {
+    this.isActive = false;
   }
 }
 
