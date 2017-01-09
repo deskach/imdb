@@ -5,6 +5,7 @@ import {SRT_TITLE, SRT_RATING, SRT_YEAR} from "./constants";
 class VideoList extends React.Component {
   static propTypes = {
     videos: PropTypes.array.isRequired,
+    sort: PropTypes.string.isRequired,
     onClear: PropTypes.func.isRequired,
     onRemoveVideo: PropTypes.func.isRequired,
     onSortingChange: PropTypes.func.isRequired,
@@ -20,9 +21,18 @@ class VideoList extends React.Component {
                   onChange={this.props.onSortingChange}
                   className="form-control"
                   style={{width: 'auto'}}>
-            <option value={SRT_TITLE}>Alphabetically</option>
-            <option value={SRT_RATING}>Rating</option>
-            <option value={SRT_YEAR}>Year</option>
+            <option value={SRT_TITLE}
+                    selected={this.props.sort == SRT_TITLE}>
+              Alphabetically
+            </option>
+            <option value={SRT_RATING}
+                    selected={this.props.sort == SRT_RATING}>
+              Rating
+            </option>
+            <option value={SRT_YEAR}
+                    selected={this.props.sort == SRT_YEAR}>
+              Year
+            </option>
           </select>
         </div>
         <br/>

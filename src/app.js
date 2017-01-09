@@ -110,6 +110,7 @@ class App extends Component {
     } else {
 
       return <VideoList videos={this.state.movies}
+                        sort={this.state.sort}
                         onSortingChange={v => this.onSortingChange(v)}
                         onRemoveVideo={d => this.removeVideo(d)}
                         onClear={_ => this.clearMovies()}/>
