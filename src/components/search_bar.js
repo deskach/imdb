@@ -1,6 +1,11 @@
-import React, {Component} from "react";
+import React, {Component, PropTypes} from "react";
 
 class SearchBar extends Component {
+  static propTypes = {
+    term: PropTypes.string.isRequired,
+    onSearchTermChange: PropTypes.func.isRequired
+  };
+
   render(){
     return (
       <div className="search-bar">

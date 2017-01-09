@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, {Component, PropTypes} from "react";
 import axios from "axios";
 import SearchItem from "./search_item";
@@ -18,14 +19,14 @@ class SearchResults extends Component {
     if (this.props.term && this.props.term.length > 1) {
       const url = encodeURI(`http://www.omdbapi.com/?s=${this.props.term}&r=json&type=movie`);
 
-      axios.get(url)
+      _.throttle(axios.get(url)
         .then(data => {
           const value = data.data.Search || null;
 
           if (this.isActive) {
             this.setState({data: value});
           }
-        });
+        }), 300);
     }
   }
 

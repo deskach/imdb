@@ -1,4 +1,3 @@
-import _ from "lodash";
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import SearchBar from "./components/search_bar";
@@ -63,12 +62,9 @@ class App extends Component {
   storage = getStorage('localStorage');
   state = {
     movies: getMovieList(this.storage, SRT_TITLE),
+    term: '',
     sort: SRT_TITLE
   };
-
-  videoSearch (term) {
-    this.setState({ term });
-  }
 
   addMovie(data) {
     this.storage.setItem(data.imdbID, JSON.stringify(data));
@@ -120,11 +116,10 @@ class App extends Component {
   }
 
   render () {
-    const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 300);
-
     return (
         <div>
-          <SearchBar onSearchTermChange={videoSearch} term={this.state.term}/>
+          <SearchBar onSearchTermChange={term => this.setState({term})}
+                     term={this.state.term}/>
           {this.renderContent()}
         </div>
     );
