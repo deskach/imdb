@@ -55,34 +55,32 @@ class SearchResults extends Component {
 
   render() {
     const {data} = this.state;
+    let items = [];
+
     if (data) {
-      const items = data.map(d => (
+      items = data.map(d => (
         <SearchItem title={d.Title}
                     key={d.imdbID}
                     onClick={this.onAdd.bind(this, d)}
         />
       ));
-
-      return (
-        <div>
-          {items}
-          <div className="pagination">
-            <button className="btn btn-default btn-add fleft"
-                    onClick={this.props.onPrev}>
-              Previous
-            </button>
-            <button className="btn btn-default btn-add fright"
-                    onClick={this.props.onNext}>
-              Next
-            </button>
-          </div>
-        </div>
-      )
-    } else if (data === null) {
-      return <div>Nothing found</div>
     }
 
-    return <div>Loading...</div>
+    return (
+      <div>
+        {items}
+        <div className="pagination">
+          <button className="btn btn-default btn-add fleft"
+                  onClick={this.props.onPrev}>
+            Previous
+          </button>
+          <button className="btn btn-default btn-add fright"
+                  onClick={this.props.onNext}>
+            Next
+          </button>
+        </div>
+      </div>
+    );
   }
 
   componentWillUnmount() {
