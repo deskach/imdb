@@ -19,14 +19,16 @@ class SearchResults extends Component {
     if (this.props.term && this.props.term.length > 1) {
       const url = encodeURI(`http://www.omdbapi.com/?s=${this.props.term}&r=json&type=movie`);
 
-      _.throttle(axios.get(url)
-        .then(data => {
-          const value = data.data.Search || null;
+      _.throttle(() => {
+        axios.get(url)
+          .then(data => {
+            const value = data.data.Search || null;
 
-          if (this.isActive) {
-            this.setState({data: value});
-          }
-        }), 300);
+            if (this.isActive) {
+              this.setState({data: value});
+            }
+          })
+      }, 300)();
     }
   }
 
@@ -44,7 +46,7 @@ class SearchResults extends Component {
       });
   }
 
-  render () {
+  render() {
     const {data} = this.state;
     if (data) {
       const items = data.map(d => (
