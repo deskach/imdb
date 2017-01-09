@@ -5,11 +5,12 @@ class VideoList extends React.Component {
   static propTypes = {
     videos: PropTypes.array.isRequired,
     onClear: PropTypes.func.isRequired,
+    onRemoveVideo: PropTypes.func.isRequired,
   };
 
   render() {
     return (
-      <div>
+      <div className="video-list">
         <span className="fleft label">Favourites</span>
         <div className="fright">
           <span className="fleft label">Sort:&nbsp;</span>
@@ -20,8 +21,11 @@ class VideoList extends React.Component {
           </select>
         </div>
         <br/>
-        <VideoItems videos={this.props.videos}/>
-        <button className="btn btn-success btn-add fright"
+        <VideoItems videos={this.props.videos}
+                    onRemove={this.props.onRemoveVideo}
+
+        />
+        <button className="btn btn-success btn-clear fright"
                 onClick={this.props.onClear}>
           Clear
         </button>

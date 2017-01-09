@@ -48,7 +48,7 @@ body {
 }
 
 .label {
-  margin-top: .5rem;
+  margin-top: .5em;
 }
 
 .search-label {
@@ -60,4 +60,12 @@ body {
 .btn-add {
   margin-top: 1em;
   margin-right: 1em;
+}
+
+.video-list {
+  margin-top: 1em;
+}
+
+.video-items {
+  margin-top: 2em;
 }

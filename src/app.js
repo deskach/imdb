@@ -27,6 +27,10 @@ class App extends Component {
     this.setState({term: null});
   }
 
+  removeVideo(d) {
+    console.log(`video ${d.imdbID} was removed`);
+  }
+
   renderContent () {
     if (this.state.term) {
       return <SearchResults term={this.state.term}
@@ -38,7 +42,9 @@ class App extends Component {
         videos.push(this.storage.getItem(this.storage.key(i)));
       }
 
-      return <VideoList videos={videos} onClear={_ => this.clearMovies()}/>
+      return <VideoList videos={videos}
+                        onRemoveVideo={d => this.removeVideo(d)}
+                        onClear={_ => this.clearMovies()}/>
     }
   }
 
