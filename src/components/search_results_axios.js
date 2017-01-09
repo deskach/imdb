@@ -26,8 +26,8 @@ class SearchResults extends Component {
     }
   }
 
-  onAdd(id) {
-    this.props.onAddMovie(id);
+  onAdd(data) {
+    this.props.onAddMovie(data);
   }
 
   render () {
@@ -36,7 +36,7 @@ class SearchResults extends Component {
       const items = data.map(d => (
         <SearchItem title={d.Title}
                     key={d.imdbID}
-                    onClick={this.onAdd.bind(this, d.imdbID)}
+                    onClick={this.onAdd.bind(this, d)}
         />
       ));
 

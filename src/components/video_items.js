@@ -1,9 +1,9 @@
-import React from 'react';
-import VideoItem from './video_item';
+import React from "react";
+import VideoItem from "./video_item";
 
 const VideoList = (props) => {
   const videoItems = props.videos.map((video) =>{
-    return <VideoItem key={video.etag} video={video} />;
+    return <VideoItem key={video.imdbID} video={video}/>;
   });
 
   return (

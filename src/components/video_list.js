@@ -1,8 +1,14 @@
-import React from 'react';
-import VideoItems from './video_items';
+import React, {PropTypes} from "react";
+import VideoItems from "./video_items";
 
-const VideoList = (props) => {
-  return (
+class VideoList extends React.Component {
+  static propTypes = {
+    videos: PropTypes.array.isRequired,
+    onClear: PropTypes.func.isRequired,
+  };
+
+  render() {
+    return (
       <div>
         <span className="fleft label">Favourites</span>
         <div className="fright">
@@ -14,9 +20,14 @@ const VideoList = (props) => {
           </select>
         </div>
         <br/>
-        <VideoItems videos={props.videos}/>
+        <VideoItems videos={this.props.videos}/>
+        <button className="btn btn-success btn-add fright"
+                onClick={this.props.onClear}>
+          Clear
+        </button>
       </div>
-  );
-};
+    );
+  }
+}
 
 export default VideoList;

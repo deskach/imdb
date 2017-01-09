@@ -4,25 +4,41 @@ import ReactDOM from "react-dom";
 import SearchBar from "./components/search_bar";
 import VideoList from "./components/video_list";
 import SearchResults from "./components/search_results";
+import {getStorage} from "./utils";
 
 class App extends Component {
-  videos = [];
+  storage = getStorage('localStorage');
   state = {};
 
   videoSearch (term) {
     this.setState({ term });
   }
 
-  addMovie(id) {
-    console.log(`${id} was added`);
+  addMovie(data) {
+    this.storage.setItem(data.imdbID, data);
+    this.setState({term: ''});
+
+    console.log(`${JSON.stringify(data)}`);
+  }
+
+  clearMovies() {
+    this.storage.clear();
+
+    this.setState({term: null});
   }
 
   renderContent () {
     if (this.state.term) {
       return <SearchResults term={this.state.term}
-                            onAddMovie={id => this.addMovie(id)}/>
+                            onAddMovie={data => this.addMovie(data)}/>
     } else {
-      return <VideoList videos={this.videos}/>
+      const videos = [];
+
+      for (let i = 0; i < this.storage.length; i++) {
+        videos.push(this.storage.getItem(this.storage.key(i)));
+      }
+
+      return <VideoList videos={videos} onClear={_ => this.clearMovies()}/>
     }
   }
 
@@ -31,7 +47,7 @@ class App extends Component {
 
     return (
         <div>
-          <SearchBar onSearchTermChange={videoSearch}/>
+          <SearchBar onSearchTermChange={videoSearch} term={this.state.term}/>
           {this.renderContent()}
         </div>
     );
