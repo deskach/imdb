@@ -16,7 +16,7 @@ class VideoList extends React.Component {
       <div className="video-list">
         <span className="fleft label">Favourites</span>
         <div className="fright">
-          <span className="fleft label">Sort:&nbsp;</span>
+          <span className="fleft label">Sort:</span>
           <select id="sort"
                   onChange={this.props.onSortingChange}
                   className="form-control"

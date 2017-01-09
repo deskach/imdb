@@ -101,6 +101,7 @@ class App extends Component {
   }
 
   renderContent () {
+    //TODO: refactore this function into routing
     if (this.state.term) {
       return <SearchResults term={this.state.term}
                             page={this.state.page}
