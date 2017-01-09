@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from "react";
 
 class SearchBar extends Component {
   static propTypes = {
-    term: PropTypes.string.isRequired,
+    term: PropTypes.string,
     onSearchTermChange: PropTypes.func.isRequired
   };
 
