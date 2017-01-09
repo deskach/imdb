@@ -40,9 +40,7 @@ function getMovieList(storage, srt) {
       movies.sort((a, b) => numCmp(parseInt(a.Year), parseInt(b.Year)));
       break;
     case SRT_RATING:
-      movies.sort((a, b) => numCmp(parseInt(a.imdbRating),
-        parseInt(b.imdbRating)
-      ));
+      movies.sort((a, b) => strCmp(a.imdbRating, b.imdbRating));
   }
 
   return movies;

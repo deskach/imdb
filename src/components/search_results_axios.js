@@ -16,7 +16,7 @@ class SearchResults extends Component {
 
   componentDidUpdate() {
     if (this.props.term && this.props.term.length > 1) {
-      const url = `http://www.omdbapi.com/?s=${this.props.term}&r=json&type=movie`;
+      const url = encodeURI(`http://www.omdbapi.com/?s=${this.props.term}&r=json&type=movie`);
 
       axios.get(url)
         .then(data => {
@@ -30,7 +30,17 @@ class SearchResults extends Component {
   }
 
   onAdd(data) {
-    this.props.onAddMovie(data);
+    // Update data with imdbRating before returning
+    const url = encodeURI(`http://www.omdbapi.com/?t=${data.Title}&y=${data.Year}r=json&type=movie`);
+
+    axios.get(url)
+      .then(result => {
+        const imdbRating = result.data.imdbRating;
+
+        if (this.isActive) {
+          this.props.onAddMovie({...data, imdbRating});
+        }
+      });
   }
 
   render () {
