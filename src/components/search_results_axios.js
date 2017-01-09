@@ -27,7 +27,7 @@ class SearchResults extends Component {
       let url = encodeURI(`https://www.omdbapi.com/?s=${nextProps.term}&r=json&type=movie`);
 
       if (nextProps.page) {
-        url += `&page=${this.props.page}`;
+        url += `&page=${nextProps.page}`;
       }
 
       _.throttle(() => {
