@@ -18,11 +18,15 @@ class SearchResults extends Component {
   };
   isActive = true; //TODO: get rid of me by using a cancallable promise
 
-  componentDidUpdate() {
-    if (this.props.term && this.props.term.length > 1) {
-      let url = encodeURI(`http://www.omdbapi.com/?s=${this.props.term}&r=json&type=movie`);
+  componentWillReceiveProps(nextProps) {
+    if (this.props.term === nextProps.term && this.props.page === nextProps.page) {
+      return;
+    }
 
-      if (this.props.page) {
+    if (nextProps.term && nextProps.term.length > 1 && nextProps.page) {
+      let url = encodeURI(`https://www.omdbapi.com/?s=${nextProps.term}&r=json&type=movie`);
+
+      if (nextProps.page) {
         url += `&page=${this.props.page}`;
       }
 
@@ -41,7 +45,7 @@ class SearchResults extends Component {
 
   onAdd(data) {
     // Update data with imdbRating before returning
-    const url = encodeURI(`http://www.omdbapi.com/?t=${data.Title}&y=${data.Year}r=json&type=movie`);
+    const url = encodeURI(`https://www.omdbapi.com/?t=${data.Title}&y=${data.Year}r=json&type=movie`);
 
     axios.get(url)
       .then(result => {
