@@ -15,7 +15,7 @@ class SearchResults extends Component {
 
   componentWillUpdate() {
     if (this.props.term && this.props.term.length > 1) {
-      const url = `http://www.omdbapi.com/?s=${this.props.term}&plot=short&r=json`;
+      const url = `http://www.omdbapi.com/?s=${this.props.term}&r=json&type=movie`;
 
       axios.get(url)
         .then(data => {

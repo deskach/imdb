@@ -14,7 +14,8 @@ class VideoList extends Component {
   render() {
     const items = this.props.videos.map(d =>(
       <VideoItem title={d.Title}
-                 key={d.imdbID}
+                 year={d.Year}
+                 rating={d.imdbRating}
                  onClick={this.onRemove.bind(this, d)}
       />
     ));

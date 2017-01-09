@@ -6,17 +6,49 @@ import VideoList from "./components/video_list";
 import SearchResults from "./components/search_results";
 import {getStorage} from "./utils";
 
+function getMovieList(storage) {
+  let movies = [];
+
+  for (let i = 0; i < storage.length; i++) {
+    const key = storage.key(i);
+    const item = storage.getItem(key);
+    const data = JSON.parse(item);
+
+    movies.push(data);
+  }
+
+  return movies;
+}
+
+function deleteMovie(storage, id) {
+  for (let i = 0; i < storage.length; i++) {
+    const key = storage.key(i);
+    const item = storage.getItem(key);
+    const data = JSON.parse(item);
+
+    if (data.imdbID == id) {
+      storage.removeItem(id);
+      break;
+    }
+  }
+}
+
 class App extends Component {
   storage = getStorage('localStorage');
-  state = {};
+  state = {
+    movies: getMovieList(this.storage)
+  };
 
   videoSearch (term) {
     this.setState({ term });
   }
 
   addMovie(data) {
-    this.storage.setItem(data.imdbID, data);
-    this.setState({term: ''});
+    this.storage.setItem(data.imdbID, JSON.stringify(data));
+    this.setState({
+      term: '',
+      movies: getMovieList(this.storage)
+    });
 
     console.log(`${JSON.stringify(data)}`);
   }
@@ -28,7 +60,10 @@ class App extends Component {
   }
 
   removeVideo(d) {
-    console.log(`video ${d.imdbID} was removed`);
+    deleteMovie(this.storage, d.imdbID);
+    this.setState({movies: getMovieList(this.storage)});
+
+    // console.log(`video ${d.imdbID} was removed`);
   }
 
   renderContent () {
@@ -36,13 +71,8 @@ class App extends Component {
       return <SearchResults term={this.state.term}
                             onAddMovie={data => this.addMovie(data)}/>
     } else {
-      const videos = [];
 
-      for (let i = 0; i < this.storage.length; i++) {
-        videos.push(this.storage.getItem(this.storage.key(i)));
-      }
-
-      return <VideoList videos={videos}
+      return <VideoList videos={this.state.movies}
                         onRemoveVideo={d => this.removeVideo(d)}
                         onClear={_ => this.clearMovies()}/>
     }

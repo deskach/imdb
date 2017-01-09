@@ -25,7 +25,7 @@ class VideoList extends React.Component {
                     onRemove={this.props.onRemoveVideo}
 
         />
-        <button className="btn btn-success btn-clear fright"
+        <button className="btn btn-primary fright"
                 onClick={this.props.onClear}>
           Clear
         </button>
