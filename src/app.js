@@ -11,6 +11,7 @@ class App extends Component {
   state = {
     movies: [],
     term: '',
+    page: 0,
     sort: SRT_TITLE
   };
 
@@ -88,9 +89,21 @@ class App extends Component {
     // console.log('State sort updated to' + e.target.value);
   }
 
+  updatePage(n) {
+    const page = this.state.page + n;
+    console.log(`new page is ${page}`);
+
+    if (page > 0) {
+      this.setState({page});
+    }
+  }
+
   renderContent () {
     if (this.state.term) {
       return <SearchResults term={this.state.term}
+                            page={this.state.page}
+                            onNext={() => this.updatePage(1)}
+                            onPrev={() => this.updatePage(-1)}
                             onAddMovie={data => this.addMovie(data)}/>
     } else {
 

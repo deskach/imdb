@@ -8,6 +8,9 @@ class SearchResults extends Component {
   static propTypes = {
     term: PropTypes.string.isRequired,
     onAddMovie: PropTypes.func.isRequired,
+    onNext: PropTypes.func,
+    onPrev: PropTypes.func,
+    page: PropTypes.number,
   };
 
   state = {
@@ -17,7 +20,11 @@ class SearchResults extends Component {
 
   componentDidUpdate() {
     if (this.props.term && this.props.term.length > 1) {
-      const url = encodeURI(`http://www.omdbapi.com/?s=${this.props.term}&r=json&type=movie`);
+      let url = encodeURI(`http://www.omdbapi.com/?s=${this.props.term}&r=json&type=movie`);
+
+      if (this.props.page) {
+        url += `&page=${this.props.page}`;
+      }
 
       _.throttle(() => {
         axios.get(url)
@@ -56,7 +63,21 @@ class SearchResults extends Component {
         />
       ));
 
-      return <div>{items}</div>
+      return (
+        <div>
+          {items}
+          <div className="pagination">
+            <button className="btn btn-default btn-add fleft"
+                    onClick={this.props.onPrev}>
+              Previous
+            </button>
+            <button className="btn btn-default btn-add fright"
+                    onClick={this.props.onNext}>
+              Next
+            </button>
+          </div>
+        </div>
+      )
     } else if (data === null) {
       return <div>Nothing found</div>
     }

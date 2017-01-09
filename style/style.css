@@ -70,3 +70,7 @@ body {
   margin-top: 2em;
   margin-bottom: 1em;
 }
+
+.pagination {
+  width: 100%;
+}
