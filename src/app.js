@@ -1,9 +1,9 @@
-import _ from 'lodash';
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import SearchBar from './components/search_bar';
-import VideoList from './components/video_list';
-import SearchResults from './components/search_results';
+import _ from "lodash";
+import React, {Component} from "react";
+import ReactDOM from "react-dom";
+import SearchBar from "./components/search_bar";
+import VideoList from "./components/video_list";
+import SearchResults from "./components/search_results";
 
 class App extends Component {
   videos = [];
@@ -13,9 +13,14 @@ class App extends Component {
     this.setState({ term });
   }
 
+  addMovie(id) {
+    console.log(`${id} was added`);
+  }
+
   renderContent () {
     if (this.state.term) {
-      return <SearchResults term={this.state.term}/>
+      return <SearchResults term={this.state.term}
+                            onAddMovie={id => this.addMovie(id)}/>
     } else {
       return <VideoList videos={this.videos}/>
     }

@@ -6,6 +6,7 @@ import SearchItem from "./search_item";
 class SearchResults extends Component {
   static propTypes = {
     term: PropTypes.string.isRequired,
+    onAddMovie: PropTypes.func.isRequired,
   };
 
   state = {
@@ -26,7 +27,7 @@ class SearchResults extends Component {
   }
 
   onAdd(id) {
-    console.log(`${id} was added`);
+    this.props.onAddMovie(id);
   }
 
   render () {
