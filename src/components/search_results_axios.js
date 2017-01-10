@@ -32,10 +32,12 @@ class SearchResults extends Component {
         url += `&page=${newPage}`;
       }
 
+      this.setState({data: null});
+
       _.throttle(() => {
         axios.get(url)
           .then(data => {
-            const value = data.data.Search || null;
+            const value = data.data.Search || [];
 
             if (this.isActive) {
               this.setState({data: value});
@@ -73,13 +75,11 @@ class SearchResults extends Component {
 
   onPrev() {
     let {term, page} = this.props.location.query;
-    const newPage = parseInt(page) - 1;
+    let newPage = parseInt(page) - 1;
 
-    if (page - 1 > 0) {
-      page = page - 1;
+    if (newPage > 0) {
+      this.context.router.push(`search?term=${term}&page=${newPage}`)
     }
-
-    this.context.router.push(`search?term=${term}&page=${newPage}`)
   }
 
   render() {
@@ -93,6 +93,8 @@ class SearchResults extends Component {
                     onClick={this.onAddMovie.bind(this, d)}
         />
       ));
+    } else if (data === null) {
+      items = <div>Loading...</div>;
     }
 
     return (
