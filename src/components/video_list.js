@@ -82,7 +82,7 @@ class VideoList extends React.Component {
           <select id="sort"
                   onChange={e => this.onSortingChange(e)}
                   className="form-control"
-                  value={this.props.sort}
+                  value={this.state.sort}
                   style={{width: 'auto'}}>
             <option value={SRT_TITLE}> Alphabetically</option>
             <option value={SRT_RATING}> Rating</option>

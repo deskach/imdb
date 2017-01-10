@@ -11,7 +11,9 @@ class App extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    this.setState({term: nextProps.location.query.term || ''});
+    this.setState({
+      term: nextProps.location.query.term || '',
+    });
   }
 
   onSearch(term) {
