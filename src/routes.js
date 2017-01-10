@@ -4,6 +4,7 @@ import App from "./components/app";
 import VideoList from "./components/video_list";
 import SearchResults from "./components/search_results";
 
+// Duplicated routes with /imdb prefix are needed to make gh-pages work
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={VideoList}/>
