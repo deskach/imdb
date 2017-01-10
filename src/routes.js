@@ -8,5 +8,7 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={VideoList}/>
     <Route path="search" component={SearchResults}/>
+    <Route path="imdb" component={VideoList}/>
+    <Route path="imdb/search" component={SearchResults}/>
   </Route>
 );
